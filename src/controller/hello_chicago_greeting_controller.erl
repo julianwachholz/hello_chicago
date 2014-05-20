@@ -2,29 +2,33 @@
 -compile(export_all).
 
 
+before_(_) ->
+    user_lib:require_login(Req).
+
+
 hello('GET', []) ->
     {ok, [{greeting, "Hello, World!"}]}.
 
 
-list('GET', []) ->
+list('GET', [], Greeter) ->
     Greetings = boss_db:find(greeting, []),
-    {ok, [{'greetings', Greetings}]}.
+    {ok, [{'greetings', Greetings}, {greeter, Greeter}]}.
 
 
-create('GET', []) ->
-    ok;
-create('POST', []) ->
+create('GET', [], Greeter) ->
+    {ok, [{greeter, Greeter}]};
+create('POST', [], Greeter) ->
     GreetingText = Req:post_param("greeting_text"),
     NewGreeting = greeting:new(id, GreetingText),
     case NewGreeting:save() of
         {ok, SavedGreeting} ->
             {redirect, [{action, "list"}]};
         {error, ErrorList} ->
-            {ok, [{errors, ErrorList}, {new_greeting, NewGreeting}]}
+            {ok, [{errors, ErrorList}, {new_greeting, NewGreeting}, {greeter, Greeter}]}
     end.
 
 
-delete('POST', []) ->
+delete('POST', [], Greeter) ->
     boss_db:delete(Req:post_param("greeting_id")),
     {redirect, [{action, "list"}]}.
 

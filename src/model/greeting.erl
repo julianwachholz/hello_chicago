@@ -1,5 +1,7 @@
--module(greeting, [Id, GreetingText]).
+-module(greeting, [Id, GreeterId, GreetingText]).
 -compile(export_all).
+
+-belongs_to(greeter).
 
 
 validation_tests() ->

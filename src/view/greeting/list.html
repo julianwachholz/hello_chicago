@@ -1,6 +1,12 @@
 <!doctype html>
 <title>Greetings</title>
 
+{% if greeter %}
+    <p>Howdy, {{ greeter.name }}.</p>
+{% else %}
+    <a href="/user/login/">Login</a>
+{% endif %}
+
 <ul>
     {% if greetings %}
         {% for greeting in greetings %}
