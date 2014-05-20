@@ -16,8 +16,3 @@ before_create() ->
                                     "negative", "positive",
                                     [{return, list}])),
     {ok, ModifiedRecord}.
-
-
-%% Push update notifications to client
-after_create() ->
-    boss_mq:push("new-greetings", THIS).
