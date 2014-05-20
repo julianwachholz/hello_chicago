@@ -1,0 +1,23 @@
+<!doctype html>
+<title>Greetings</title>
+
+<ul>
+    {% if greetings %}
+        {% for greeting in greetings %}
+            <li>{{ greeting.greeting_text }}</li>
+        {% endfor %}
+    {% else %}
+        <li><em>No greetings</em></li>
+    {% endif %}
+</ul>
+
+<a href="{% url action="create" %}">New greeting</a>
+
+<form method="post" action="{% url action="delete" %}">
+    <select name="greeting_id">
+        {% for greeting in greetings %}
+            <option value="{{ greeting.id }}">{{ greeting.greeting_text }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Delete selected greeting.</button>
+</form>
