@@ -1,6 +1,8 @@
 -module(hello_chicago_greeting_controller, [Req]).
 -compile(export_all).
 
+-default_action(list).
+
 
 before_(_) ->
     user_lib:require_login(Req).
@@ -13,6 +15,11 @@ hello('GET', []) ->
 list('GET', [], Greeter) ->
     Greetings = boss_db:find(greeting, []),
     {ok, [{'greetings', Greetings}, {greeter, Greeter}]}.
+
+
+show('GET', [GreetingId], Greeter) ->
+    Greeting = boss_db:find(GreetingId),
+    {ok, [{greeting, Greeting}, {greeter, Greeter}]}.
 
 
 create('GET', [], Greeter) ->

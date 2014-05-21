@@ -1,0 +1,16 @@
+<!doctype html>
+<title>Greeting</title>
+
+{% if greeter %}
+    <p>Howdy, {{ greeter.name }}.</p>
+{% else %}
+    <a href="/user/login/">Login</a>
+{% endif %}
+
+<h2>Greeting</h2>
+
+<p>{{ greeting.greeting_text }}</p>
+
+<p><em>Created by:</em> {{ greeting.greeter.name }}</p>
+
+<a href="{% url action="list" %}">List greetings</a>

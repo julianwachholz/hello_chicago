@@ -10,7 +10,11 @@
 <ul>
     {% if greetings %}
         {% for greeting in greetings %}
-            <li>{{ greeting.greeting_text }} (from {{ greeting.greeter.name }})</li>
+            <li>
+                <a href="{% url action="show" greeting_id=greeting.id %}">
+                    {{ greeting.greeting_text }}
+                </a>
+            </li>
         {% endfor %}
     {% else %}
         <li><em>No greetings</em></li>
