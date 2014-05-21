@@ -19,7 +19,7 @@ create('GET', [], Greeter) ->
     {ok, [{greeter, Greeter}]};
 create('POST', [], Greeter) ->
     GreetingText = Req:post_param("greeting_text"),
-    NewGreeting = greeting:new(id, GreetingText),
+    NewGreeting = greeting:new(id, Greeter:id(), GreetingText),
     case NewGreeting:save() of
         {ok, SavedGreeting} ->
             {redirect, [{action, "list"}]};
