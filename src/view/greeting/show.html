@@ -11,6 +11,13 @@
 
 <p>{{ greeting.greeting_text }}</p>
 
-<p><em>Created by:</em> {{ greeting.greeter.name }}</p>
+<dl>
+    <dt>Created by</dt>
+    <dd>{{ greeting.greeter.name }}</dd>
+    <dt>Created at</dt>
+    <dd>{{ greeting.created_at }}</dd>
+    <dt>Updated at</dt>
+    <dd>{{ greeting.updated_at }}</dd>
+</dl>
 
 <a href="{% url action="list" %}">List greetings</a>
