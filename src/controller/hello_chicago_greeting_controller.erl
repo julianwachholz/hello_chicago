@@ -4,6 +4,7 @@
 -default_action(list).
 
 
+before_("hello") -> ok;
 before_(_) ->
     user_lib:require_login(Req).
 
