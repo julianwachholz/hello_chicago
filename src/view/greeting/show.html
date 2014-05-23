@@ -15,9 +15,9 @@
     <dt>Created by</dt>
     <dd>{{ greeting.greeter.name }}</dd>
     <dt>Created at</dt>
-    <dd>{{ greeting.created_at }}</dd>
+    <dd>{{ greeting.created_at|date:"D d M Y, H:i:s" }}</dd>
     <dt>Updated at</dt>
-    <dd>{{ greeting.updated_at }}</dd>
+    <dd>{{ greeting.updated_at|date:"D d M Y, H:i:s" }}</dd>
 </dl>
 
 <a href="{% url action="list" %}">List greetings</a>
