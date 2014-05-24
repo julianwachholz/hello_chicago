@@ -13,13 +13,13 @@ hash_for(Name, Password) ->
 
 require_login(Req) ->
     case Req:cookie("user_id") of
-        undefined -> {redirect, "/user/login/"};
+        undefined -> {ok, []};
         Id ->
             case boss_db:find(Id) of
-                undefined -> {redirect, "/user/login/"};
+                undefined -> {ok, []};
                 Greeter ->
                     case Greeter:session_identifier() =:= Req:cookie("session_id") of
-                        false -> {redirect, "/user/login/"};
+                        false -> {ok, []};
                         true -> {ok, Greeter}
                     end
                 end
