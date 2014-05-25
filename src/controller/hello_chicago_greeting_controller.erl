@@ -24,7 +24,7 @@ show('GET', [GreetingId], Greeter) ->
 
 
 create('GET', [], Greeter) ->
-    {ok, [{greeter, Greeter}]};
+    {render_other, [{action, "form"}], [{greeter, Greeter}]};
 create('POST', [], Greeter) ->
     GreetingText = Req:post_param("greeting_text"),
     NewGreeting = greeting:new(id, Greeter:id(), GreetingText, undefined, undefined),
@@ -32,7 +32,22 @@ create('POST', [], Greeter) ->
         {ok, SavedGreeting} ->
             {redirect, [{action, "list"}]};
         {error, ErrorList} ->
-            {ok, [{errors, ErrorList}, {new_greeting, NewGreeting}, {greeter, Greeter}]}
+            {render_other, [{action, "form"}], [{errors, ErrorList}, {greeting, NewGreeting}, {greeter, Greeter}]}
+    end.
+
+
+edit('GET', [GreetingId], Greeter) ->
+    {render_other, [{action, "form"}], [{greeting, boss_db:find(GreetingId)}]};
+edit('POST', [GreetingId], Greeter) ->
+    OldGreeting = boss_db:find(GreetingId),
+    UpdatedGreeting = OldGreeting:set([
+        {greeting_text, Req:post_param("greeting_text")}
+    ]),
+    case UpdatedGreeting:save() of
+        {ok, SavedGreeting} ->
+            {redirect, [{action, "list"}]};
+        {error, ErrorList} ->
+            {render_other, [{action, "form"}], [{errors, ErrorList}, {greeting, UpdatedGreeting}, {greeter, Greeter}]}
     end.
 
 

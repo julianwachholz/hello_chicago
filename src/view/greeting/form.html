@@ -1,0 +1,26 @@
+<!doctype html>
+<title>Greeting Form</title>
+
+{% if errors %}
+    <ul>
+        {% for error in errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if greeting.saved %}
+<h1>modifying {{ greeting.id }}</h1>
+{% endif %}
+
+<form method="post">
+    <textarea name="greeting_text" placeholder="Hello, World!"
+        >{% if greeting %}{{ greeting.greeting_text }}{% endif %}</textarea>
+    <button type="submit">
+        {% if greeting.saved %}
+            Update greeting
+        {% else %}
+            Create new greeting
+        {% endif %}
+    </button>
+</form>

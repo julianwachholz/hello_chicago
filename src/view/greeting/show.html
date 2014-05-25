@@ -20,4 +20,11 @@
     <dd>{{ greeting.updated_at|date:"D d M Y, H:i:s" }}</dd>
 </dl>
 
-<a href="{% url action="list" %}">List greetings</a>
+<ul>
+    <li>
+        <a href="{% url action="edit" greeting_id=greeting.id %}">Modify greeting</a>
+    </li>
+    <li>
+        <a href="{% url action="list" %}">List greetings</a>
+    </li>
+</ul>

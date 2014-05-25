@@ -10,6 +10,10 @@
 -belongs_to(greeter).
 
 
+saved() ->
+    not(Id =:= id).
+
+
 validation_tests() ->
     [{fun() -> length(GreeterId) > 0 end,
         "Greeting must have a greeter."},
