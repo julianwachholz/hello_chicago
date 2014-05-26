@@ -2,13 +2,13 @@
 -compile(export_all).
 
 
-hash_password(Password, Salt) ->
-    mochihex:to_hex(erlang:md5(Salt ++ Password)).
+hash_password(Password) ->
+    {ok, Salt} = bcrypt:gen_salt(),
+    bcrypt:hashpw(Password, Salt).
 
 
-hash_for(Name, Password) ->
-    Salt = mochihex:to_hex(erlang:md5(Name)),
-    hash_password(Password, Salt).
+compare_password(Attempt, Password) ->
+    {ok, Password} =:= bcrypt:hashpw(Attempt, Password).
 
 
 require_login(Req) ->

@@ -15,8 +15,7 @@ session_identifier() ->
 
 
 check_password(Password) ->
-    Salt = mochihex:to_hex(erlang:md5(Name)),
-    user_lib:hash_password(Password, Salt) =:= PasswordHash.
+    user_lib:compare_password(Password, PasswordHash).
 
 
 login_cookies() ->
