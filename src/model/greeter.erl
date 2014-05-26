@@ -1,4 +1,8 @@
--module(greeter, [Id, Name, PasswordHash]).
+-module(greeter,
+        [Id,
+         Name,
+         PasswordHash::string()
+        ]).
 -compile(export_all).
 
 -has({greetings, many}).
