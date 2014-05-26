@@ -13,9 +13,14 @@ login('POST', []) ->
                 true ->
                     {redirect, proplists:get_value("redirect",
                         Req:post_params(), "/"), Greeter:login_cookies()};
-                false ->
-                    {ok, [{error, "Bad username/password combination."}]}
+                false -> login_failed()
             end;
         [] ->
-            {ok, [{error, "Bad username/password combination."}]}
+            login_failed()
     end.
+
+login_failed() ->
+    {ok, [
+        {redirect, Req:post_param("redirect")},
+        {error, "Bad username/password combination."}
+    ]}.
