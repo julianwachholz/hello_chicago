@@ -2,7 +2,9 @@
 .eunit
 .rebar
 deps
+dist
 ebin
 erl_crash.dump
 log
 rebar
+rel/hello_chicago

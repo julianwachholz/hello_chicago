@@ -6,7 +6,7 @@ REBAR=rebar
 DIALYZER=dialyzer
 DIALYZER_APPS=kernel stdlib sasl inets crypto public_key ssl
 
-.PHONY: deps rel test test-eunit test-fun
+.PHONY: deps rel test test-eunit test-fun dialyze
 
 all: app
 
@@ -22,7 +22,8 @@ clean: $(REBAR)
 rel: app
 	@cd rel && ../$(REBAR) generate
 
-dist: rel
+dist: dist/$(APP).tar.gz
+dist/$(APP).tar.gz: rel
 	@mkdir -p dist && tar zcf dist/$(APP).tar.gz -C rel $(APP)
 
 test: test-eunit test-fun

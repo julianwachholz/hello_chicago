@@ -1,6 +1,6 @@
 REBAR=./rebar
 
-.PHONY: 
+.PHONY:
 
 all: compile
 hello_chicago: all
@@ -10,6 +10,3 @@ compile:
 
 clean:
     @$(REBAR) clean
-
-start:
-    ./init-dev.sh
