@@ -1,4 +1,0 @@
-%% The controller/action pair to be used on the home page.
-%% Format: [{controller, "Controller"}, {action, "Action"}]
-
-{"/", [{controller, "admin"}, {action, "index"}]}.
