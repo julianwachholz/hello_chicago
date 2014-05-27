@@ -1,12 +1,11 @@
--module(hello_chicago_greeting_controller, [Req]).
+-module(hello_chicago_greeting_controller, [Req, SessionID]).
 -compile(export_all).
 
 -default_action(list).
 
 
-before_("hello") -> ok;
 before_(_) ->
-    user_lib:require_login(Req).
+    user_lib:require_login(SessionID).
 
 
 hello('GET', []) ->

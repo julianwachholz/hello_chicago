@@ -11,16 +11,10 @@ compare_password(Attempt, Password) ->
     {ok, Password} =:= bcrypt:hashpw(Attempt, Password).
 
 
-require_login(Req) ->
-    case Req:cookie("user_id") of
+require_login(SessionID) ->
+    UserId = boss_session:get_session_data(SessionID, "user_id"),
+    case boss_db:find(UserId) of
         undefined -> {ok, []};
-        Id ->
-            case boss_db:find(Id) of
-                undefined -> {ok, []};
-                Greeter ->
-                    case Greeter:session_identifier() =:= Req:cookie("session_id") of
-                        false -> {ok, []};
-                        true -> {ok, Greeter}
-                    end
-                end
+        {error, _} -> {ok, []};
+        Greeter -> {ok, Greeter}
     end.
