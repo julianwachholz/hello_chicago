@@ -1,10 +1,11 @@
 *.plt
+.erlang.mk.*
 .eunit
 .rebar
+_rel
 deps
 dist
 ebin
 erl_crash.dump
 log
 rebar
-_rel

@@ -1,5 +1,5 @@
 -module(hello_chicago_custom_tags).
--compile(export_all).
+%-compile(export_all).
 
 % put custom tags in here, e.g.
 %

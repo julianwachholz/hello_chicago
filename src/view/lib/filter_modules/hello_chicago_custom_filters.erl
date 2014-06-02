@@ -1,5 +1,4 @@
 -module(hello_chicago_custom_filters).
--compile(export_all).
 
 % put custom filters in here, e.g.
 %
